@@ -1,6 +1,6 @@
 # Prompter v1.00
 
-**Prompter v1.00** is a lightweight, ready-to-use tool designed to streamline the use of AI prompts. It enables users to quickly insert pre-written prompts, organized in a folder structure, directly into AI chat applications or other text fields with a simple keyboard shortcut.
+I finally got so lazy writing the same prompts and/or small clarifications for ChatGPT over and over again that I decided to automate the process. I gathered all the prompts into one folder and wrote a little program **Prompter** that **scans the files in subfolders and displays the file structure as a simple context menu invoked by Win+Alt+P**. If you select an item from the menu (which is actually the name of a corresponding file), **the content of that file gets copied to the clipboard and then pasted wherever your cursor is currently positioned in the ChatGPT input field or any other AI chat window**.
 
 ## How It Works
 
