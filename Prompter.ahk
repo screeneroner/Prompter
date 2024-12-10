@@ -20,6 +20,8 @@
 ; Your honor and gratitude is greatly appreciated.
 ;----------------------------------------------------------------------------------------------------------------------
 
+; v1.01 2024-12-10 Added delays in clipboard operation to make sure it was completed
+
 #Persistent
 #NoEnv
 #SingleInstance Force
@@ -44,24 +46,25 @@ To properly use Prompter v1.00, follow these steps:
     )
 }
 
-Menu, PromptMenu, Add, Refresh Menu, RefreshMenu
+Menu, PromptMenu, Add,  Refresh Menu, RefreshMenu
 Menu, PromptMenu, Add
-Menu, PromptMenu, Add, Help, ShowHelp
+Menu, PromptMenu, Add,  Help, ShowHelp
 Menu, PromptMenu, Icon, Help, shell32.dll, 24
-Menu, PromptMenu, Add, Buy me a coffee, BuyCoffee
+Menu, PromptMenu, Add,  Buy me a coffee, BuyCoffee
 Menu, PromptMenu, Icon, Buy me a coffee, shell32.dll, 160
-Menu, PromptMenu, Add, Exit, ExitApplication
+Menu, PromptMenu, Add,  Exit, ExitApplication
 Menu, PromptMenu, Icon, Exit, shell32.dll, 113
 
-Menu, Tray, Tip, Prompter v1.0 by screeneroner
-Menu, Tray, Add, Prompter v1.00 Help, ShowHelp
-Menu, Tray, Icon, Prompter v1.00 Help, shell32.dll, 222
+Menu, Tray, Tip,     Prompter v1.0 by screeneroner
+Menu, Tray, Add,     Prompter v1.00 Help, ShowHelp
+Menu, Tray, Icon,    Prompter v1.00 Help, shell32.dll, 222
 Menu, Tray, Default, Prompter v1.00 Help
 Menu, Tray, Add
-Menu, Tray, Add, Buy me a coffee, BuyCoffee
+Menu, Tray, Add,  Buy me a coffee, BuyCoffee
 Menu, Tray, Icon, Buy me a coffee, shell32.dll, 160
-Menu, Tray, Add, Exit, ExitApplication
+Menu, Tray, Add,  Exit, ExitApplication
 Menu, Tray, Icon, Exit, shell32.dll, 28
+
 Menu, Tray, NoStandard
 Menu, Tray, Icon, shell32.dll, 134
 
@@ -118,7 +121,9 @@ ShowFile() {
         FileRead, FileContent, %FilePath%
         Clipboard := FileContent
         ClipWait
+        Sleep, 500 
         Send ^v
+        Sleep, 500 
         Clipboard := ClipboardBackup 
     }
 }
