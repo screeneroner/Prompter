@@ -81,7 +81,7 @@ Menu, PromptMenu, Show
 Return
 
 RefreshMenu() {
-    global MenuFilePath
+    global MenuFilePath, promptsFolderPath
     MenuFilePath := Object()  ; Initialize as an object (associative array)
     Menu, PromptMenu, DeleteAll
     BuildMenu(promptsFolderPath, "PromptMenu")
