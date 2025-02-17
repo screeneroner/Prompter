@@ -21,12 +21,19 @@
 ;----------------------------------------------------------------------------------------------------------------------
 
 ; v1.01 2024-12-10 Added delays in clipboard operation to make sure it was completed
+; v1.02 2025-02-17 In cmdline can be set the path to the folder with prompt. if not A_ScriptDir . "\Prompts" used
 
 #Persistent
 #NoEnv
 #SingleInstance Force
 SetWorkingDir %A_ScriptDir%
-global MenuFilePath
+global MenuFilePath, promptsFolderPath
+; Handle command-line arguments
+if (A_Args.Length() > 0) {
+    promptsFolderPath := A_Args[1]
+} else {
+    promptsFolderPath := A_ScriptDir . "\Prompts"
+}
 
 ShowHelp() {
     MsgBox, 64, Prompter v1.00 by screeneroner, 
@@ -55,10 +62,10 @@ Menu, PromptMenu, Icon, Buy me a coffee, shell32.dll, 160
 Menu, PromptMenu, Add,  Exit, ExitApplication
 Menu, PromptMenu, Icon, Exit, shell32.dll, 113
 
-Menu, Tray, Tip,     Prompter v1.0 by screeneroner
-Menu, Tray, Add,     Prompter v1.00 Help, ShowHelp
-Menu, Tray, Icon,    Prompter v1.00 Help, shell32.dll, 222
-Menu, Tray, Default, Prompter v1.00 Help
+Menu, Tray, Tip,     Prompter v1.02 by screeneroner
+Menu, Tray, Add,     Prompter v1.02 Help, ShowHelp
+Menu, Tray, Icon,    Prompter v1.02 Help, shell32.dll, 222
+Menu, Tray, Default, Prompter v1.02 Help
 Menu, Tray, Add
 Menu, Tray, Add,  Buy me a coffee, BuyCoffee
 Menu, Tray, Icon, Buy me a coffee, shell32.dll, 160
@@ -77,7 +84,7 @@ RefreshMenu() {
     global MenuFilePath
     MenuFilePath := Object()  ; Initialize as an object (associative array)
     Menu, PromptMenu, DeleteAll
-    BuildMenu("Prompts", "PromptMenu")
+    BuildMenu(promptsFolderPath, "PromptMenu")
 }
 
 BuildMenu(Folder, MenuName) {
